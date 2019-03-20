@@ -1,0 +1,14 @@
+﻿@model ToDo.Data.Model.TasksList
+
+@{
+    ViewBag.Title = "AddToDoTask";
+}
+
+@using (Html.BeginForm("AddToDo", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.TaskCategory, new { @Value = ViewBag.SelectedCategory })
+    @Html.TextBoxFor(m => m.TaskNotes, new { @class = "todo-items" })
+    <div class="add-task-button">
+        <input type="submit" class="add-todo-button" id="addbutton" value="Add a to-do">
+    </div>
+}

@@ -1,0 +1,22 @@
+﻿@model ToDo.Data.Model.TasksList
+
+@{
+    ViewBag.Title = "AddList";
+    ViewBag.DefaultName = "Untitled List";
+}
+
+@{ Html.RenderAction("Index", "Home"); }
+
+@using (Html.BeginForm("AddToDoList", "Home", FormMethod.Post))
+{
+    <div class="right-container">
+        <div class="right-container-image">
+            <div class="category-name">
+                @Html.TextBoxFor(Tuple => Tuple.TaskCategory, new { @Value = ViewBag.DefaultName, @class = "task-name" })
+            </div>
+        </div>
+        <div class="add-task-button">
+            <input type="submit" class="add-todo-button" id="addbutton" value="Add a to-do">
+        </div>
+    </div>
+}

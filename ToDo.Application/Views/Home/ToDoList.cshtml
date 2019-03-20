@@ -1,0 +1,40 @@
+﻿@*@model Tuple<ToDo.Data.Model.TasksList, List<ToDo.Data.Model.TasksList>>*@
+@model  ToDo.Data.Model.Tasks
+
+@{
+    ViewBag.Title = "ToDoList";
+}
+
+@{ Html.RenderAction("Index", "Home"); }
+
+<div class="right-container">
+    <div class="right-container-image">
+        <div class="category-name">
+            <div class="todo-header">
+                ToDo
+            </div>
+        </div>
+    </div>
+    <div class="all-todoes">
+        @foreach (var item in Model.taskList)
+        {
+            if (item.TaskCategory == "ToDo")
+            {
+                ViewBag.Task = item.id;
+                ViewBag.SelectedList = item.TaskCategory;
+                ViewBag.SelectedTask = item.TaskNotes;
+                <div class="category-box">
+                    <div class="task-circle">
+                        <i class="fa fa-check-circle"></i>
+                        <div class="task-notes">
+                            <a href="@Url.Action("DetailsWidget","Home",new { id = ViewBag.SelectedList, notes = ViewBag.SelectedTask })">
+                                @Html.DisplayFor(modelItem => item.TaskNotes)<br />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        @Html.Partial("AddToDoTask", Model.task)
+    </div>
+</div>

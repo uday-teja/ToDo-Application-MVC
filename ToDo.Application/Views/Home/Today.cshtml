@@ -1,0 +1,40 @@
+﻿@*@model Tuple<ToDo.Data.Model.TasksList, List<ToDo.Data.Model.TasksList>>*@
+@model  ToDo.Data.Model.Tasks
+
+@{
+    ViewBag.Title = "Today";
+}
+@{ Html.RenderAction("Index", "Home"); }
+
+<div class="right-container">
+    <div class="right-container-image">
+        <div class="category-name">
+            <div class="my-day">
+                My Day
+            </div>
+            <div class="date-time">
+                @DateTime.Now.DayOfWeek, @DateTime.Now.ToString("MMMM") @DateTime.Now.Day
+            </div>
+        </div>
+    </div>
+
+    @foreach (var item in Model.taskList)
+    {
+        if (item.TaskCreationDate == DateTime.Now.Date)
+        {
+            ViewBag.Task = item.id;
+            ViewBag.SelectedList = item.TaskCategory;
+            ViewBag.SelectedTask = item.TaskNotes;
+            <div class="category-box">
+                <div class="task-circle">
+                    <i class="fa fa-check-circle"></i>
+                    <div class="task-notes">
+                        <a href="@Url.Action("DetailsWidget","Home",new { id = ViewBag.SelectedList, notes = ViewBag.SelectedTask })">
+                            @Html.DisplayFor(modelItem => item.TaskNotes)<br />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

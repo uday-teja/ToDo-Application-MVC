@@ -1,0 +1,36 @@
+﻿@model List<ToDo.Data.Model.TasksList>
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<div class="left-container">
+    <div class="todo">
+        <h2> ToDo List  </h2>
+    </div>
+    <div class="today-box">
+        @Html.ActionLink("Today", "Today")
+    </div>
+    <div class="to-do">
+        @Html.ActionLink("To Do", "ToDoList")
+    </div>
+    <div class="category-container">
+
+        @foreach (var item in Model.Select(x => x.TaskCategory).Distinct())
+        {
+            if (item != "ToDo")
+            {
+                     <div class="category-box">
+                        @Html.ActionLink(item, "SelectedList", "Home", new { id = item},null)
+                        <br />
+                    </div>
+            }
+        }
+
+        <div class="new-list">
+            <div class="add-task-button">
+                @Html.ActionLink("Add New List", "AddList", "Home")
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿@model ToDo.Data.Model.TasksList
+
+@{
+    ViewBag.Title = "UpdateToDo";
+}
+
+@using (Html.BeginForm("UpdateToDo", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(m=>m.id, new { @Value = ViewBag.Task})
+    @Html.HiddenFor(m => m.TaskCategory, new { @Value = ViewBag.SelectedList })
+    <div class="task-creation-date">
+        Add a Date
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.TaskCreationDate, new { @Value = ViewBag.TaskDate, @class = "datepicker datebox" })
+        </div>
+    </div>
+    <div class="task-description">
+        <div class="task-desciption-header">
+            Task Notes
+        </div>
+        @Html.TextBoxFor(m => m.TaskNotes, new { @Value = ViewBag.TaskNotes, @class = "task-desc" })
+    </div>
+    <div class="add-task-button">
+        <input type="submit" class="add-todo-button" id="addbutton" value="Update ToDo">
+        <div class="del-button">
+            <a href="@Url.Action("DeleteToDo", "Home", new { id = ViewBag.SelectedTask })">Delete</a>
+        </div>
+    </div>
+}

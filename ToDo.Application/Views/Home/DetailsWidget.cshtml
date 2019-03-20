@@ -1,0 +1,31 @@
+﻿@*@model Tuple<ToDo.Data.Model.TasksList, List<ToDo.Data.Model.TasksList>>*@
+
+@model  ToDo.Data.Model.Tasks
+
+@{
+    ViewBag.Title = "DetailsWidget";
+}
+
+@{ Html.RenderAction("SelectedList", "Home"); }
+
+<div id="mySidenav" class="sidenav">
+
+    @foreach (var item in Model.taskList)
+    {
+            if (item.TaskCategory == ViewBag.SelectedToDo && item.TaskNotes == ViewBag.SelectedTask)
+            {
+                ViewBag.Task = item.id;
+                ViewBag.TaskDate = item.TaskCreationDate;
+                ViewBag.TaskNotes = item.TaskNotes;
+                <div class="category-box">
+                    <div class="task-circle">
+                        <i class="fa fa-check-circle"></i>
+                        <div class="task-notes">
+                            @Html.DisplayFor(modelItem => item.TaskNotes)<br />
+                        </div>
+                    </div>
+                </div>
+                @Html.Partial("UpdateToDo", item)
+            }
+    }
+</div>
